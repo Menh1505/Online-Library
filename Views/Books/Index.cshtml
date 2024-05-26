@@ -1,0 +1,109 @@
+@model IEnumerable<OnlineLibrary.Models.Book>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookPhoto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookAuthor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookGenre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookPublicationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookPublisher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookPages)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookRating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookLanguage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Featured)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JustArrived)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookPhoto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookAuthor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookGenre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookPublicationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookPublisher)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookPages)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookRating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookLanguage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Featured)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JustArrived)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.BookId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

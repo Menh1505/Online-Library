@@ -17,7 +17,7 @@ namespace OnlineLibrary.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.3")
+                .HasAnnotation("ProductVersion", "9.0.0-preview.4.24267.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -269,6 +269,12 @@ namespace OnlineLibrary.Data.Migrations
                     b.Property<int?>("BookRating")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Featured")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("JustArrived")
+                        .HasColumnType("bit");
+
                     b.HasKey("BookId");
 
                     b.ToTable("Books");
@@ -300,7 +306,7 @@ namespace OnlineLibrary.Data.Migrations
                     b.Property<int>("BookId1")
                         .HasColumnType("int");
 
-                    b.Property<int>("DiscountId")
+                    b.Property<int?>("DiscountId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDiscount")
@@ -328,6 +334,10 @@ namespace OnlineLibrary.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
+
+                    b.Property<string>("CategoryPhoto")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(100)
@@ -482,9 +492,7 @@ namespace OnlineLibrary.Data.Migrations
 
                     b.HasOne("OnlineLibrary.Models.Discount", "Discount")
                         .WithMany()
-                        .HasForeignKey("DiscountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DiscountId");
 
                     b.Navigation("Book");
 

@@ -1,0 +1,99 @@
+@model OnlineLibrary.Models.Book
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+
+<div>
+    <h4>Book</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BookPhoto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BookPhoto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BookName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BookName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BookAuthor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BookAuthor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BookGenre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BookGenre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BookPublicationDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BookPublicationDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BookPublisher)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BookPublisher)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BookDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BookDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BookPages)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BookPages)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BookRating)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BookRating)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BookLanguage)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BookLanguage)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Featured)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Featured)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.JustArrived)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.JustArrived)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.BookId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+</body>
+</html>

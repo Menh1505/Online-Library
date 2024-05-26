@@ -26,6 +26,7 @@ namespace OnlineLibrary.Models
         public int? BookRating { get; set; }
         [StringLength(30)]
         public string? BookLanguage { get; set; }
+        public bool Featured { get; set; }
+        public bool JustArrived {get; set; }
     }
-
 }

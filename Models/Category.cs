@@ -8,5 +8,7 @@ namespace OnlineLibrary.Models
         public int CategoryId { get; set; }
         [StringLength(100)]
         public string? Name { get; set; }
+        [StringLength(300)]
+        public string? CategoryPhoto { get; set; }
     }
 }

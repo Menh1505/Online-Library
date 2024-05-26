@@ -1,0 +1,94 @@
+@model OnlineLibrary.Models.Book
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+
+<h4>Book</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BookPhoto" class="control-label"></label>
+                <input asp-for="BookPhoto" class="form-control" />
+                <span asp-validation-for="BookPhoto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookName" class="control-label"></label>
+                <input asp-for="BookName" class="form-control" />
+                <span asp-validation-for="BookName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookAuthor" class="control-label"></label>
+                <input asp-for="BookAuthor" class="form-control" />
+                <span asp-validation-for="BookAuthor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookGenre" class="control-label"></label>
+                <input asp-for="BookGenre" class="form-control" />
+                <span asp-validation-for="BookGenre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookPublicationDate" class="control-label"></label>
+                <input asp-for="BookPublicationDate" class="form-control" />
+                <span asp-validation-for="BookPublicationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookPublisher" class="control-label"></label>
+                <input asp-for="BookPublisher" class="form-control" />
+                <span asp-validation-for="BookPublisher" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookDescription" class="control-label"></label>
+                <input asp-for="BookDescription" class="form-control" />
+                <span asp-validation-for="BookDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookPages" class="control-label"></label>
+                <input asp-for="BookPages" class="form-control" />
+                <span asp-validation-for="BookPages" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookRating" class="control-label"></label>
+                <input asp-for="BookRating" class="form-control" />
+                <span asp-validation-for="BookRating" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookLanguage" class="control-label"></label>
+                <input asp-for="BookLanguage" class="form-control" />
+                <span asp-validation-for="BookLanguage" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Featured" /> @Html.DisplayNameFor(model => model.Featured)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="JustArrived" /> @Html.DisplayNameFor(model => model.JustArrived)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</body>
+</html>

@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace OnlineLibrary.Models
 {
@@ -14,7 +15,8 @@ namespace OnlineLibrary.Models
         public decimal? Rentall { get; set;}
         public bool IsDiscount { get; set;}
         [ForeignKey("Discount")]
-        public int DiscountId {get; set;}
-        public Discount Discount { get; set;}
+        [AllowNull]
+        public int? DiscountId {get; set;}
+        public Discount? Discount { get; set;}
     }
 }
