@@ -18,15 +18,21 @@ namespace OnlineLibrary.Data.Migrations
                     BookId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BookPhoto = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    BookISBN = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     BookName = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     BookAuthor = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
-                    BookGenre = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
                     BookPublicationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     BookPublisher = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BookDescription = table.Column<string>(type: "nvarchar(max)", maxLength: 30000, nullable: true),
                     BookPages = table.Column<int>(type: "int", nullable: true),
                     BookRating = table.Column<int>(type: "int", nullable: true),
-                    BookLanguage = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true)
+                    BookLanguage = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    Featured = table.Column<bool>(type: "bit", nullable: false),
+                    JustArrived = table.Column<bool>(type: "bit", nullable: false),
+                    SellPrice = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
+                    RentalPrice = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
+                    IsDiscount = table.Column<bool>(type: "bit", nullable: false),
+                    DiscountAmount = table.Column<decimal>(type: "decimal(2,2)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -39,25 +45,12 @@ namespace OnlineLibrary.Data.Migrations
                 {
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                    CategoryName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    CategoryPhoto = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.CategoryId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Discounts",
-                columns: table => new
-                {
-                    DiscountId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DiscountName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    DiscountAmount = table.Column<decimal>(type: "decimal(2,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Discounts", x => x.DiscountId);
                 });
 
             migrationBuilder.CreateTable(
@@ -134,35 +127,6 @@ namespace OnlineLibrary.Data.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BookPrices",
-                columns: table => new
-                {
-                    BookId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BookId1 = table.Column<int>(type: "int", nullable: false),
-                    Sell = table.Column<decimal>(type: "decimal(8,2)", nullable: true),
-                    Rentall = table.Column<decimal>(type: "decimal(8,2)", nullable: true),
-                    IsDiscount = table.Column<bool>(type: "bit", nullable: false),
-                    DiscountId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BookPrices", x => x.BookId);
-                    table.ForeignKey(
-                        name: "FK_BookPrices_Books_BookId1",
-                        column: x => x.BookId1,
-                        principalTable: "Books",
-                        principalColumn: "BookId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BookPrices_Discounts_DiscountId",
-                        column: x => x.DiscountId,
-                        principalTable: "Discounts",
-                        principalColumn: "DiscountId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -305,16 +269,6 @@ namespace OnlineLibrary.Data.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookPrices_BookId1",
-                table: "BookPrices",
-                column: "BookId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BookPrices_DiscountId",
-                table: "BookPrices",
-                column: "DiscountId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Inventories_BookId",
                 table: "Inventories",
                 column: "BookId");
@@ -366,9 +320,6 @@ namespace OnlineLibrary.Data.Migrations
                 name: "BookCategories");
 
             migrationBuilder.DropTable(
-                name: "BookPrices");
-
-            migrationBuilder.DropTable(
                 name: "Inventories");
 
             migrationBuilder.DropTable(
@@ -388,9 +339,6 @@ namespace OnlineLibrary.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "Discounts");
 
             migrationBuilder.DropTable(
                 name: "Books");

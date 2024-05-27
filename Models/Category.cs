@@ -7,7 +7,7 @@ namespace OnlineLibrary.Models
         [Key]
         public int CategoryId { get; set; }
         [StringLength(100)]
-        public string? Name { get; set; }
+        public string? CategoryName { get; set; }
         [StringLength(300)]
         public string? CategoryPhoto { get; set; }
     }

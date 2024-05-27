@@ -240,7 +240,8 @@ namespace OnlineLibrary.Data.Migrations
                         .HasMaxLength(30000)
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("BookGenre")
+                    b.Property<string>("BookISBN")
+                        .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
@@ -269,11 +270,23 @@ namespace OnlineLibrary.Data.Migrations
                     b.Property<int?>("BookRating")
                         .HasColumnType("int");
 
+                    b.Property<decimal?>("DiscountAmount")
+                        .HasColumnType("decimal(2,2)");
+
                     b.Property<bool>("Featured")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDiscount")
                         .HasColumnType("bit");
 
                     b.Property<bool>("JustArrived")
                         .HasColumnType("bit");
+
+                    b.Property<decimal>("RentalPrice")
+                        .HasColumnType("decimal(8,2)");
+
+                    b.Property<decimal>("SellPrice")
+                        .HasColumnType("decimal(8,2)");
 
                     b.HasKey("BookId");
 
@@ -295,38 +308,6 @@ namespace OnlineLibrary.Data.Migrations
                     b.ToTable("BookCategories");
                 });
 
-            modelBuilder.Entity("OnlineLibrary.Models.BookPrice", b =>
-                {
-                    b.Property<int>("BookId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookId"));
-
-                    b.Property<int>("BookId1")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DiscountId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDiscount")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal?>("Rentall")
-                        .HasColumnType("decimal(8,2)");
-
-                    b.Property<decimal?>("Sell")
-                        .HasColumnType("decimal(8,2)");
-
-                    b.HasKey("BookId");
-
-                    b.HasIndex("BookId1");
-
-                    b.HasIndex("DiscountId");
-
-                    b.ToTable("BookPrices");
-                });
-
             modelBuilder.Entity("OnlineLibrary.Models.Category", b =>
                 {
                     b.Property<int>("CategoryId")
@@ -335,37 +316,17 @@ namespace OnlineLibrary.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
 
+                    b.Property<string>("CategoryName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("CategoryPhoto")
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("OnlineLibrary.Models.Discount", b =>
-                {
-                    b.Property<int>("DiscountId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DiscountId"));
-
-                    b.Property<decimal>("DiscountAmount")
-                        .HasColumnType("decimal(2,2)");
-
-                    b.Property<string>("DiscountName")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("DiscountId");
-
-                    b.ToTable("Discounts");
                 });
 
             modelBuilder.Entity("OnlineLibrary.Models.Inventory", b =>
@@ -480,23 +441,6 @@ namespace OnlineLibrary.Data.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("book");
-                });
-
-            modelBuilder.Entity("OnlineLibrary.Models.BookPrice", b =>
-                {
-                    b.HasOne("OnlineLibrary.Models.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OnlineLibrary.Models.Discount", "Discount")
-                        .WithMany()
-                        .HasForeignKey("DiscountId");
-
-                    b.Navigation("Book");
-
-                    b.Navigation("Discount");
                 });
 
             modelBuilder.Entity("OnlineLibrary.Models.Inventory", b =>

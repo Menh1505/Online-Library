@@ -14,11 +14,13 @@ namespace OnlineLibrary.ViewModel
         public int? BookRating { get; set; }
         public string? BookLanguage { get; set; }
         public bool Featured { get; set; }
-        public bool JustArrived {get; set; }
-        public decimal? Sell { get; set;}
-        public decimal? Rentall { get; set;}
-        public bool IsDiscount { get; set;}
+        public bool JustArrived { get; set; }
+        public decimal? Sell { get; set; }
+        public decimal? Rentall { get; set; }
+        public bool IsDiscount { get; set; }
         public string? DiscountName { get; set; }
         public decimal DiscountAmount { get; set; }
+        public string CategoryName { get; set; }
+        public string CategoryPhoto { get; set; }
     }
 }

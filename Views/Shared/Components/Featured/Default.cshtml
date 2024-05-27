@@ -1,4 +1,4 @@
-@model IEnumerable<OnlineLibrary.ViewModel.BookViewModel>
+@model IEnumerable<OnlineLibrary.Models.Book>
 
 <div class="container-fluid pt-5">
     <div class="text-center mb-4">
@@ -10,21 +10,21 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="@item.BookPhoto" alt="">
+                        <img class="img-fluid w-100" src="/img/books/@item.BookPhoto" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">@item.BookName</h6>
                         <div class="d-flex justify-content-center">
                             @if (@item.IsDiscount == true)
                             {
-                                <h6>Sell:$(@item.Sell*(1 - @item.DiscountAmount))</h6>
-                                <h6>Rentall:$@item.Rentall</h6>
-                                <h6 class="text-muted ml-2"><del>$@item.Sell</del></h6>
+                                <h6>Sell:$(@item.SellPrice*(1 - @item.DiscountAmount))</h6>
+                                <h6>Rentall:$@item.RentalPrice</h6>
+                                <h6 class="text-muted ml-2"><del>$@item.SellPrice</del></h6>
                             }
                             else
                             {
-                                <h6>Sell:$@item.Sell</h6>
-                                <h6>Rentall:$@item.Rentall</h6>
+                                <h6>Sell:$@item.SellPrice</h6>
+                                <h6>Rentall:$@item.RentalPrice</h6>
                             }
                         </div>
                     </div>

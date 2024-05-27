@@ -25,9 +25,7 @@ public class ApplicationDbContext : IdentityDbContext
     }
     public DbSet<Book> Books { get; set;}
     public DbSet<BookCategory> BookCategories {get; set;}   
-    public DbSet<BookPrice> BookPrices { get; set;}
     public DbSet<Category> Categories { get; set;}
-    public DbSet<Discount> Discounts{ get; set;}
     public DbSet<Inventory> Inventories { get; set;}
     public DbSet<Warehouse> Warehouses { get; set;}
 }
