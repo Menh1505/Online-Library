@@ -5,11 +5,11 @@ using OnlineLibrary.ViewModel;
 
 namespace OnlineLibrary.Components
 {
-    public class Featured : ViewComponent
+    public class JustArrived : ViewComponent
     {
         private readonly ApplicationDbContext _context;
 
-        public Featured(ApplicationDbContext context)
+        public JustArrived(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -40,7 +40,7 @@ namespace OnlineLibrary.Components
                             DiscountName = discount.DiscountName,   
                             DiscountAmount = discount.DiscountAmount
                         };
-            return View(model.Where(b=>b.Featured == true).ToList());
+            return View(model.Where(b=>b.JustArrived == true).ToList());
         }
     }
 }
