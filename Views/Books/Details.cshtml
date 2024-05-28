@@ -1,93 +1,149 @@
 @model OnlineLibrary.Models.Book
 
 @{
-    Layout = null;
 }
 
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
+    <title>Chi tiết sách</title>
 </head>
+
 <body>
 
-<div>
-    <h4>Book</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BookPhoto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BookPhoto)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BookName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BookName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BookAuthor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BookAuthor)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BookPublicationDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BookPublicationDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BookPublisher)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BookPublisher)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BookDescription)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BookDescription)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BookPages)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BookPages)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BookRating)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BookRating)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BookLanguage)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BookLanguage)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Featured)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Featured)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.JustArrived)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.JustArrived)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.BookId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    <!-- Shop Detail Start -->
+    <div class="container-fluid py-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-5 pb-5">
+                <div id="product-carousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner border">
+                        <div class="carousel-item active">
+                            <img class="w-50 h-50" src="/img/books/@Model.BookPhoto" alt="Image">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="w-50 h-50" src="/img/books/@Model.BookPhoto" alt="Image">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="w-50 h-50" src="/img/books/@Model.BookPhoto" alt="Image">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="w-50 h-50" src="/img/books/@Model.BookPhoto" alt="Image">
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
+                        <i class="fa fa-2x fa-angle-left text-dark"></i>
+                    </a>
+                    <a class="carousel-control-next" href="#product-carousel" data-slide="next">
+                        <i class="fa fa-2x fa-angle-right text-dark"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-7 pb-5">
+                <h3 class="font-weight-semi-bold">@Model.BookName</h3>
+                <div class="d-flex mb-3">
+                    <div class="text-primary mr-2">
+                        <small class="fas fa-star"></small>
+                        <small class="fas fa-star"></small>
+                        <small class="fas fa-star"></small>
+                        <small class="fas fa-star-half-alt"></small>
+                        <small class="far fa-star"></small>
+                    </div>
+                    <small class="pt-1">(50 Reviews)</small>
+                </div>
+                @if (Model.IsDiscount == true)
+                {
+                    <h3 class="font-weight-semi-bold mb-4">Giá bán: <del>@Model.SellPrice</del> (@Model.SellPrice * (1 -
+                        @Model.DiscountAmount)) VND</h3>
+                    <h3 class="font-weight-semi-bold mb-4">Giá thuê: <del>@Model.RentalPrice</del> (@Model.RentalPrice * (1
+                        - @Model.DiscountAmount)) VND</h3>
+                }
+                else
+                {
+                    <h3 class="font-weight-semi-bold mb-4">Giá bán: @Model.SellPrice VND</h3>
+                    <h3 class="font-weight-semi-bold mb-4">Giá thuê: @Model.RentalPrice VND</h3>
+                }
+                <p class="mb-4">@Model.BookDescription</p>
+
+                <div class="d-flex align-items-center mb-4 pt-2">
+                    <div class="input-group quantity mr-3" style="width: 130px;">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary btn-minus">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <input type="text" class="form-control bg-secondary text-center" value="1">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary btn-plus">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Thêm vào giỏ hàng</button>
+                    <button class="btn btn-secondary px-4"><i class="fa fa-shopping-cart mr-1"></i> Mua ngay</button>
+                </div>
+                <div class="d-flex pt-2">
+                    <p class="text-dark font-weight-medium mb-0 mr-2">Chia sẽ sản phẩm:</p>
+                    <div class="d-inline-flex">
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2>Chi tiết sản phẩm</h2>
+        <div>
+            <ul class="">
+                <li>
+                    <span class="a-list-item">
+                        <span style="font-weight: bold;">
+                            Tác giả:
+                        </span>
+                        <span>@Model.BookAuthor</span>
+                    </span>
+                </li>
+                <li>
+                    <span class="a-list-item">
+                        <span style="font-weight: bold;">
+                            Ngôn ngữ:
+                        </span>
+                        <span>@Model.BookLanguage</span>
+                    </span>
+                </li>
+                <li>
+                    <span class="a-list-item">
+                        <span style="font-weight: bold;">
+                            Số trang:
+                        </span>
+                        <span>@Model.BookPages</span>
+                    </span>
+                </li>
+                <li>
+                    <span class="a-list-item">
+                        <span style="font-weight: bold;">
+                            ISBN:
+                        </span>
+                        <span>@Model.BookISBN</span>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <!-- Shop Detail End -->
+
+
 </body>
+
 </html>
