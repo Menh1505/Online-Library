@@ -1,6 +1,6 @@
 @model IEnumerable<OnlineLibrary.Models.Category>
 
-<div class="col-lg-3 d-none d-lg-block">
+<div class="col-lg-3 d-none d-lg-block" data-mdb-perfect-scrollbar="true" style="position: relative; width: 600px; height: 100px ; z-index:1000">
     <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
         data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
         <h6 class="m-0">Danh mục sách</h6>
@@ -8,10 +8,14 @@
     </a>
     <nav class="collapse navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
         id="navbar-vertical">
-        <div class="navbar-nav w-100 overflow-hidden" >
-            @foreach (var item in Model)
+        <div class="navbar-nav w-100" style="background-color: white">
+            @* @foreach (var item in Model)
             {
                 <a href="/Books/Index/?CategoryId=@item.CategoryId" class="nav-item nav-link">@item.CategoryName</a>
+            } *@
+            @for(int i = 0; i < 22; ++i)
+            {
+                <a href="/Books/Index/?CategoryId=" class="nav-item nav-link">Category @i</a>
             }
         </div>
     </nav>
