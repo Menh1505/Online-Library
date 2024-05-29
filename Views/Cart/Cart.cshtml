@@ -1,0 +1,97 @@
+@model Cart
+
+<!-- Cart Start -->
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+
+
+        <div class="col-lg-8 table-responsive mb-5">
+            <table class="table table-bordered text-center mb-0">
+                <thead class="bg-secondary text-dark">
+                    <tr>
+                        <th>Sách</th>
+                        <th>Giá bán</th>
+                        <th>Giá thuê</th>
+                        <th>Số lượng</th>
+                        <th>Tổng</th>
+                        <th>Xóa</th>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+
+                    @foreach (var line in Model?.Lines)
+                    {
+                        <tr>
+                            <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;">
+                                @line.Book.BookName</td>
+                            @if (line.Book.IsDiscount == true)
+                            {
+                                <td class="align-middle">@(line.Book.SellPrice * (1 - line.Book.DiscountAmount)) VND</td>
+                                <td class="align-middle">@(line.Book.RentalPrice * (1 - line.Book.DiscountAmount)) VND</td>
+                            }
+                            else
+                            {
+                                <td class="align-middle">@line.Book.SellPrice VND</td>
+                                <td class="align-middle">@line.Book.RentalPrice VND</td>
+                            }
+                            <td class="align-middle">
+                                <div class="input-group quantity mx-auto" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <a href="/Cart/RemoveFromCart/?bookId=@line.Book.BookId" class="btn btn-sm btn-primary btn-minus">
+                                            <i class="fa fa-minus"></i>
+                                        </a >
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm bg-secondary text-center"
+                                        value="@line.Quantity">
+                                    <div class="input-group-btn">
+                                        <a href="/Cart/AddToCart/?bookId=@line.Book.BookId" class="btn btn-sm btn-primary btn-plus">
+                                            <i class="fa fa-plus"></i>
+                                        </a >
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="align-middle">@(line.Book.SellPrice * line.Quantity)</td>
+                            <td class="align-middle"><a href="/Cart/DeleteCart/?BookId=@line.Book.BookId" class="btn btn-sm btn-primary"><i
+                                        class="fa fa-times"></i></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="col-lg-4">
+            <form class="mb-5" action="">
+                <div class="input-group">
+                    <input type="text" class="form-control p-4" placeholder="Coupon Code">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary">Mã giá</button>
+                    </div>
+                </div>
+            </form>
+            <div class="card border-secondary mb-5">
+                <div class="card-header bg-secondary border-0">
+                    <h4 class="font-weight-semi-bold m-0">Tổng hàng</h4>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-3 pt-1">
+                        <h6 class="font-weight-medium">Tổng tiền</h6>
+                        <h6 class="font-weight-medium">@Model.ComputeTotalValues() VND</h6>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h6 class="font-weight-medium">Phí giao hàng</h6>
+                        <h6 class="font-weight-medium">100.000 VND</h6>
+                    </div>
+                </div>
+                <div class="card-footer border-secondary bg-transparent">
+                    <div class="d-flex justify-content-between mt-2">
+                        <h5 class="font-weight-bold">Tổng thanh toán</h5>
+                        <h5 class="font-weight-bold">@(Model.ComputeTotalValues() + 100000) VND</h5>
+                    </div>
+                    <button class="btn btn-block btn-primary my-3 py-3">Xác nhận thanh toán</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Cart End -->
