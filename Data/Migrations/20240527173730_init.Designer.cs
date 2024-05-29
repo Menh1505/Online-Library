@@ -12,7 +12,7 @@ using OnlineLibrary.Data;
 namespace OnlineLibrary.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240527071714_init")]
+    [Migration("20240527173730_init")]
     partial class init
     {
         /// <inheritdoc />
