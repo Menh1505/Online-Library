@@ -14,6 +14,11 @@ namespace MyApp.Namespace
             _context = context;
         }
         public Cart? Cart { get; set; }
+
+        public ActionResult Index()
+        {
+            return Redirect("/Cart/Cart.cshtml");
+        }
         public ActionResult AddToCart(int BookId)
         {
             Book? book = _context.Books.FirstOrDefault(b => b.BookId == BookId);

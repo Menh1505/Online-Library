@@ -20,8 +20,16 @@ namespace OnlineLibrary.Controllers
         }
 
         // GET: Books
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? categoryId)
         {
+            if(categoryId != null)
+            {
+                var model = from a in _context.Books join b in _context.BookCategories 
+                            on a.BookId equals b.BookId
+                            where b.CategoryId == categoryId
+                            select a;
+                return View(await model.ToListAsync());
+            }
             return View(await _context.Books.ToListAsync());
         }
 
