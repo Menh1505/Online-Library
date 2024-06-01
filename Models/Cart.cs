@@ -29,7 +29,7 @@ namespace OnlineLibrary.Models
         public void RemoveLine(Book book) =>
             Lines.RemoveAll(l => l.Book.BookId == book.BookId);
         public decimal ComputeTotalValues() => 
-            (decimal)Lines.Sum(l => l.Book.SellPrice * l.Quantity);
+            (decimal)Lines.Sum(l => l.Book?.SellPrice * (1 - l.Book?.DiscountAmount) * l.Quantity);
         public void Clear() =>
             Lines.Clear();
     }
