@@ -34,15 +34,15 @@ namespace OnlineLibrary.Controllers
         }
 
         // GET: Books/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? bookId)
         {
-            if (id == null)
+            if (bookId == null)
             {
                 return NotFound();
             }
 
             var book = await _context.Books
-                .FirstOrDefaultAsync(m => m.BookId == id);
+                .FirstOrDefaultAsync(m => m.BookId == bookId);
             if (book == null)
             {
                 return NotFound();
