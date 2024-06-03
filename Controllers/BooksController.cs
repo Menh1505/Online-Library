@@ -20,7 +20,11 @@ namespace OnlineLibrary.Controllers
         }
 
         // GET: Books
-        public async Task<IActionResult> Index(int? categoryId)
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Books.ToListAsync());
+        }
+        public async Task<IActionResult> BookById(int? categoryId)
         {
             if(categoryId != null)
             {
@@ -28,9 +32,9 @@ namespace OnlineLibrary.Controllers
                             on a.BookId equals b.BookId
                             where b.CategoryId == categoryId
                             select a;
-                return View(await model.ToListAsync());
+                return View("Index", await model.ToListAsync());
             }
-            return View(await _context.Books.ToListAsync());
+            return View("Index", await _context.Books.ToListAsync());
         }
 
         // GET: Books/Details/5

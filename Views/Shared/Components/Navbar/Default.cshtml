@@ -11,7 +11,7 @@
         <div class="navbar-nav w-100" style="background-color: white">
             @foreach (var item in Model)
             {
-                <a href="/Books/Index/?CategoryId=@item.CategoryId" class="nav-item nav-link">@item.CategoryName</a>
+                <a href="/Books/BookById/?categoryId=@item.CategoryId" class="nav-item nav-link">@item.CategoryName</a>
             } 
         </div>
     </nav>

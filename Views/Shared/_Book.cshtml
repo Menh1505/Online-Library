@@ -4,21 +4,23 @@
 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
     <div class="card product-item border-0 mb-4">
         <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-            <img class="img-fluid w-100" src="/img/books/@Model.BookPhoto" alt="">
+            <a href="/Books/Details/?bookId=@Model.BookId">
+                <img class="img-fluid w-100" src="/img/books/@Model.BookPhoto" alt="">
+            </a>
         </div>
         <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
             <h6 class="text-truncate mb-3">@Model.BookName</h6>
             <div class="d-flex justify-content-center">
                 @if (@Model.IsDiscount == true)
                 {
-                    <h6>Sell:$(@Model.SellPrice*(1 - @Model.DiscountAmount))</h6>
-                    <h6>Rentall:$@Model.RentalPrice</h6>
-                    <h6 class="text-muted ml-2"><del>$@Model.SellPrice</del></h6>
+                    <h6>Sell:(@Model.SellPrice*(1 - @Model.DiscountAmount))VND</h6>
+                    <h6>Rentall:@(Model.RentalPrice)VND</h6>
+                    <h6 class="text-muted ml-2"><del>@Model.SellPrice</del>VND</h6>
                 }
                 else
                 {
-                    <h6>Sell:$@Model.SellPrice</h6>
-                    <h6>Rentall:$@Model.RentalPrice</h6>
+                    <h6>Sell:@(Model.SellPrice)VND</h6>
+                    <h6 >Rentall:@(Model.RentalPrice)VND</h6>
                 }
             </div>
         </div>
