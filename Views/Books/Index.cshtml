@@ -1,4 +1,5 @@
-@model IEnumerable<OnlineLibrary.Models.Book>
+@using OnlineLibrary.Models.ViewModel;
+@model BookListViewModel
 
 <!-- Shop Start -->
 <div class="container-fluid pt-5">
@@ -52,7 +53,7 @@
                         <label class="custom-control-label" for="price-all">Mọi thể loại</label>
                         <span class="badge border font-weight-normal">số sách trong cat</span>
                     </div>
-                    
+
                 </form>
             </div>
             <!-- Color End -->
@@ -89,7 +90,7 @@
                     </div>
                 </div>
 
-                @foreach (var item in Model)
+                @foreach (var item in Model.Books)
                 {
                     <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                         <div class="card product-item border-0 mb-4">
@@ -133,9 +134,10 @@
                                     <span class="sr-only">Trang trước</span>
                                 </a>
                             </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            @for (int i = 1; i <= Model.pagingInfo.TotalPages; ++i)
+                            {
+                                <li class="page-item active"><a class="page-link" href="/Books?bookPage=@i">@i</a></li>
+                            }
                             <li class="page-item">
                                 <a class="page-link" href="#" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>

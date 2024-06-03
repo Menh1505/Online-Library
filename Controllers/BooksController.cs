@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnlineLibrary.Data;
 using OnlineLibrary.Models;
+using OnlineLibrary.Models.ViewModel;
 
 namespace OnlineLibrary.Controllers
 {
@@ -18,11 +19,22 @@ namespace OnlineLibrary.Controllers
         {
             _context = context;
         }
-
+        public int pageSize = 9;
         // GET: Books
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int bookPage = 1)
         {
-            return View(await _context.Books.ToListAsync());
+            return View(
+                new BookListViewModel
+                {
+                    Books = _context.Books.Skip((bookPage - 1) * pageSize).Take(pageSize).ToList(),
+                    pagingInfo = new PagingInfo
+                    {
+                        ItemsPerPage = pageSize,
+                        CurrentPage = bookPage,
+                        TotalItems = _context.Books.Count()
+                    }
+                }
+            );
         }
         public async Task<IActionResult> BookById(int? categoryId)
         {
