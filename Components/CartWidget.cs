@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineLibrary.Data;
+using OnlineLibrary.Infrastructure;
 using OnlineLibrary.Models;
 using OnlineLibrary.ViewModel;
 
@@ -16,7 +17,7 @@ namespace OnlineLibrary.Components
 
         public IViewComponentResult Invoke()
         {
-            return View(_context.Books.Where(b=>b.Featured == true).ToList());
+            return View(HttpContext.Session.GetJson<Cart>("cart"));
         }
     }
 }

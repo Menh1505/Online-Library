@@ -13,7 +13,8 @@
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -62,7 +63,8 @@
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a href="" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">T</span>hư viện</h1>
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                            class="text-primary font-weight-bold border px-3 mr-1">T</span>hư viện</h1>
                 </a>
             </div>
             <div class="col-lg-6 col-6 text-left">
@@ -82,9 +84,7 @@
                     <i class="fas fa-heart text-primary"></i>
                     <span class="badge">0</span>
                 </a>
-                <a href="" class="btn border">
-                    @await Component.InvokeAsync("Navbar")      
-                </a>
+                @await Component.InvokeAsync("CartWidget")
             </div>
         </div>
     </div>
@@ -94,14 +94,15 @@
     <!-- Navbar Start -->
     <div class="container-fluid mb-5">
         <div class="row border-top px-xl-5">
-            
+
 
             @await Component.InvokeAsync("Navbar")
 
             <div class="col-lg-9">
                 <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
                     <a href="" class="text-decoration-none d-block d-lg-none">
-                        <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">T</span>hư viện</h1>
+                        <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                                class="text-primary font-weight-bold border px-3 mr-1">T</span>hư viện</h1>
                     </a>
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
@@ -121,13 +122,13 @@
                             <a href="contact.html" class="nav-item nav-link">Liên hệ</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
-                            <partial name="_LoginPartial"/>
+                            <partial name="_LoginPartial" />
                         </div>
                     </div>
                 </nav>
             </div>
         </div>
-        <div id="header-carousel" class="carousel slide" data-ride="carousel" >
+        <div id="header-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" style="height: 410px;">
                     <img class="img-fluid" src="/img/navbar-1.jpg" alt="Image">
@@ -150,16 +151,16 @@
                     </div>
                 </div>
             </div>
-                <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
-                    <div class="btn btn-dark" style="width: 45px; height: 45px;">
-                        <span class="carousel-control-prev-icon mb-n2"></span>
-                    </div>
-                </a>
-                <a class="carousel-control-next" href="#header-carousel" data-slide="next">
-                    <div class="btn btn-dark" style="width: 45px; height: 45px;">
-                        <span class="carousel-control-next-icon mb-n2"></span>
-                    </div>
-                </a>
+            <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                    <span class="carousel-control-prev-icon mb-n2"></span>
+                </div>
+            </a>
+            <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                    <span class="carousel-control-next-icon mb-n2"></span>
+                </div>
+            </a>
         </div>
     </div>
     <!-- Navbar End -->
@@ -171,7 +172,8 @@
         <div class="row px-xl-5 pt-5">
             <div class="col-lg-4 col-md-12 mb-6 pr-3 pr-xl-5">
                 <a href="" class="text-decoration-none">
-                    <h1 class="mb-4 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border border-white px-3 mr-1">T</span>hư viện</h1>
+                    <h1 class="mb-4 display-5 font-weight-semi-bold"><span
+                            class="text-primary font-weight-bold border border-white px-3 mr-1">T</span>hư viện</h1>
                 </a>
                 <p style="text-align: justify">Đinh Thiên Mệnh</p>
                 <p style="text-align: justify">Đỗ Vĩnh Phú</p>
@@ -185,29 +187,37 @@
             <div class="col-lg-8 col-md-12">
                 <div class="row">
                     <div class="col-md-2"></div>
-                    <div class="col-md-5 mb-5" >
+                    <div class="col-md-5 mb-5">
                         <h5 class="font-weight-bold text-dark mb-4">Liên kết nhanh</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                            <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Thư viện</a>
-                            <a class="text-dark mb-2" href="./Views/Home/detail.cshtml"><i class="fa fa-angle-right mr-2"></i>Chi tiết thư viện</a>
-                            <a class="text-dark mb-2" href="Cart.cshtml"><i class="fa fa-angle-right mr-2"></i>Giỏ hàng</a>
-                            <a class="text-dark mb-2" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Thanh toán</a>
-                            <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Liên hệ chúng tôi</a>
+                            <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Trang
+                                chủ</a>
+                            <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Thư
+                                viện</a>
+                            <a class="text-dark mb-2" href="./Views/Home/detail.cshtml"><i
+                                    class="fa fa-angle-right mr-2"></i>Chi tiết thư viện</a>
+                            <a class="text-dark mb-2" href="Cart.cshtml"><i class="fa fa-angle-right mr-2"></i>Giỏ
+                                hàng</a>
+                            <a class="text-dark mb-2" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Thanh
+                                toán</a>
+                            <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Liên hệ chúng
+                                tôi</a>
                         </div>
                     </div>
                     <div class="col-md-5 mb-5">
                         <h5 class="font-weight-bold text-dark mb-4">Đăng kí thành viên</h5>
                         <form action="">
                             <div class="form-group">
-                                <input type="text" class="form-control border-0 py-4" placeholder="Tên của bạn" required="required" />
+                                <input type="text" class="form-control border-0 py-4" placeholder="Tên của bạn"
+                                    required="required" />
                             </div>
                             <div class="form-group">
                                 <input type="email" class="form-control border-0 py-4" placeholder="Email"
                                     required="required" />
                             </div>
                             <div>
-                                <button class="btn btn-primary btn-block border-0 py-3" type="submit">Đăng kí ngay</button>
+                                <button class="btn btn-primary btn-block border-0 py-3" type="submit">Đăng kí
+                                    ngay</button>
                             </div>
                         </form>
                     </div>
@@ -217,8 +227,9 @@
         <div class="row border-top border-light mx-xl-5 py-4">
             <div class="col-md-6 px-xl-0">
                 <p class="mb-md-0 text-center text-md-left text-dark">
-                    &copy; <a class="text-dark font-weight-semi-bold" href="#">Thư Viện Online</a>. All Rights Reserved. Designed
-                    by 
+                    &copy; <a class="text-dark font-weight-semi-bold" href="#">Thư Viện Online</a>. All Rights Reserved.
+                    Designed
+                    by
                     <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML Codex</a>
                 </p>
             </div>

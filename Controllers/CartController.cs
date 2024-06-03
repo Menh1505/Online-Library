@@ -15,9 +15,9 @@ namespace MyApp.Namespace
         }
         public Cart? Cart { get; set; }
 
-        public ActionResult Index()
+        public IActionResult Index()
         {
-            return Redirect("/Cart/Cart.cshtml");
+            return View("Cart",  HttpContext.Session.GetJson<Cart>("cart") ?? new Cart());
         }
         public ActionResult AddToCart(int BookId)
         {
