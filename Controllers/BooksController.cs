@@ -36,6 +36,25 @@ namespace OnlineLibrary.Controllers
                 }
             );
         }
+        [HttpPost]
+        public async Task<IActionResult> Search(string keyword, int bookPage = 1)
+        {
+            return View("Index",
+                new BookListViewModel
+                {
+                    Books = _context.Books
+                            .Where(b => b.BookName.Contains(keyword))
+                            .Skip((bookPage - 1) * pageSize)
+                            .Take(pageSize).ToList(),
+                    pagingInfo = new PagingInfo
+                    {
+                        ItemsPerPage = pageSize,
+                        CurrentPage = bookPage,
+                        TotalItems = _context.Books.Count()
+                    }
+                }
+            );
+        }
         public async Task<IActionResult> BookById(int? categoryId)
         {
             if(categoryId != null)

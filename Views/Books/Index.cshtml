@@ -66,12 +66,12 @@
             <div class="row pb-3">
                 <div class="col-12 pb-1">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <form action="">
+                        <form asp-action="Search" asp-controller="Books">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Tìm theo tên">
+                                <input type="text" name="keyword" class="form-control" placeholder="Tìm theo tên">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-transparent text-primary">
-                                        <i class="fa fa-search"></i>
+                                        <button type="submit" class="fa fa-search"></button>
                                     </span>
                                 </div>
                             </div>
