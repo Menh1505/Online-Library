@@ -193,10 +193,61 @@
             }
         }).then(function(result){
             $("#filtered-books").html(result);
+            var TotalItems = document.querySelectorAll(".col-lg-4");
+            var PageSize = 9;
+            var TotalPages = Math.ceil(TotalItems.length/PageSize);
+            const div = document.createElement("div");
+            div.classList.add("col-12", "pb-1");
+            const nav = document.createElement("nav");
+            nav.classList.add("col-12", "pb-1");
+
+            const ul = document.createElement("ul");
+            ul.classList.add("pagination", "justify-content-center", "mb-3");
+            for(var i = 1; i <= TotalPages; ++i)
+            {
+                var li = document.createElement("li");
+                li.classList.add("page-item");
+                var a = document.createElement("a");
+                a.classList.add("page-link");
+                a.innerHTML = i;
+                a.addEventListener("onclick", handlePageLinkClick)
+                a.setAttribute("href", "#");
+                li.appendChild(a);
+                ul.appendChild(li);
+            }
+            nav.appendChild(ul);
+            div.appendChild(nav);
+            document.getElementById("filtered-books").appendChild(div);
+            ShowPage(1);d
         }).catch(function (error) {
             console.log("Phát hiện lỗi", error)
         })
     })
+    function handlePageLinkClick(event)
+    {
+        event.preventDefault();
+        var pageNumber = parseInt(event.target.textContent);
+        ShowPage(pageNumber);
+    }
+    function ShowPage(pageNumber)
+    {
+        var productItems = document.querySelectorAll(".col-lg-4");
+        var itemPerPage = 9;
+        var startIndex = (pageNumber-1)*itemPerPage;
+        var endIndex = startIndex + itemPerPage;
+
+        for(var i = 0; i < productItems.length; ++i)
+        {
+            if(i >= startIndex && i < endIndex)
+            {
+                productItems[i].style.display = 'block';
+            }
+            else 
+            {
+                productItems[i].style.display = 'none';
+            }
+        }
+    }
     function getSelectedCheckboxes(formId) {
         var checkboxes = $('#' + formId + ' input[type="checkbox"]:checked');
         var values = []
