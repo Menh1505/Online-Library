@@ -33,7 +33,7 @@ namespace OnlineLibrary.Controllers
             if(filter.Cat != null && filter.Cat.Count > 0 && !filter.Cat.Contains("all"))
             {
                 var catList = filter.Cat.ToList();
-                var selectCat = _context.BookCategories.Where(bc => filter.Cat.Contains(bc.CategoryId.ToString())).ToList();
+                var selectCat = _context.BookCategories.Where(bc => filter.Cat.Contains(bc.CategoryId.ToString())).ToList(); //lụm bọn category trước để có bảng join với book
                 filteredBooks = (from a in filteredBooks
                                 join b in selectCat 
                                 on a.BookId equals b.BookId
@@ -42,7 +42,7 @@ namespace OnlineLibrary.Controllers
             if (filter.PriceRange != null && filter.PriceRange.Count > 0 && !filter.PriceRange.Contains("all"))
             {
                 List<PriceRange> priceRanges = new List<PriceRange>();
-                foreach (var range in filter.PriceRange)
+                foreach (var range in filter.PriceRange) //tách dữ liệu 
                 {
                     var value = range.Split("-").ToArray();
                     PriceRange priceRange = new PriceRange();
