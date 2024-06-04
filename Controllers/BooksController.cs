@@ -20,7 +20,41 @@ namespace OnlineLibrary.Controllers
             _context = context;
         }
         public int pageSize = 9;
+        public class PriceRange
+        {
+            public int Min { get; set; }
+            public int Max { get; set; }
+        }
         // GET: Books
+        public IActionResult GetFilteredBooks([FromBody] FilterData filter)
+        {
+            var filteredBooks = _context.Books.ToList();
+            //đưa cái lọc theo loại lên trước vì nó liên kết 2 bản phức tạp
+            if(filter.Cat != null && filter.Cat.Count > 0 && !filter.Cat.Contains("all"))
+            {
+                var catList = filter.Cat.ToList();
+                var selectCat = _context.BookCategories.Where(bc => filter.Cat.Contains(bc.CategoryId.ToString())).ToList();
+                filteredBooks = (from a in filteredBooks
+                                join b in selectCat 
+                                on a.BookId equals b.BookId
+                                select a).ToList();             
+            }
+            if (filter.PriceRange != null && filter.PriceRange.Count > 0 && !filter.PriceRange.Contains("all"))
+            {
+                List<PriceRange> priceRanges = new List<PriceRange>();
+                foreach (var range in filter.PriceRange)
+                {
+                    var value = range.Split("-").ToArray();
+                    PriceRange priceRange = new PriceRange();
+                    priceRange.Min = Int16.Parse(value[0]);
+                    priceRange.Max = Int16.Parse(value[1]);
+                    priceRanges.Add(priceRange);
+                }
+                filteredBooks = filteredBooks.Where(b => priceRanges.Any(r=>b.SellPrice >= r.Min && b.SellPrice <= r.Max)).ToList();
+            }
+            
+            return PartialView("_ReturnBooks", filteredBooks);
+        }
         public async Task<IActionResult> Index(int bookPage = 1)
         {
             return View(
@@ -32,7 +66,9 @@ namespace OnlineLibrary.Controllers
                         ItemsPerPage = pageSize,
                         CurrentPage = bookPage,
                         TotalItems = _context.Books.Count()
-                    }
+                    },
+                    categories = _context.Categories,
+                    bookCategories = _context.BookCategories
                 }
             );
         }
@@ -51,15 +87,18 @@ namespace OnlineLibrary.Controllers
                         ItemsPerPage = pageSize,
                         CurrentPage = bookPage,
                         TotalItems = _context.Books.Count()
-                    }
+                    },
+                    categories = _context.Categories,
+                    bookCategories = _context.BookCategories
                 }
             );
         }
         public async Task<IActionResult> BookById(int? categoryId)
         {
-            if(categoryId != null)
+            if (categoryId != null)
             {
-                var model = from a in _context.Books join b in _context.BookCategories 
+                var model = from a in _context.Books
+                            join b in _context.BookCategories
                             on a.BookId equals b.BookId
                             where b.CategoryId == categoryId
                             select a;

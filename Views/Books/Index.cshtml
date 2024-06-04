@@ -9,61 +9,69 @@
             <!-- Price Start -->
             <div class="border-bottom mb-4 pb-4">
                 <h5 class="font-weight-semi-bold mb-4">Lọc theo giá</h5>
-                <form>
+                <form id="price-filter-form">
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="price-all">
+                        <input type="checkbox" class="custom-control-input" val="all" checked id="price-all">
                         <label class="custom-control-label" for="price-all">Mọi giá</label>
                         <span class="badge border font-weight-normal">1000</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-1">
-                        <label class="custom-control-label" for="price-1">$0 - $100</label>
+                        <input type="checkbox" class="custom-control-input" val="0-100" id="price-1">
+                        <label class="custom-control-label" for="price-1">0k - 100k VND</label>
                         <span class="badge border font-weight-normal">150</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-2">
-                        <label class="custom-control-label" for="price-2">$100 - $200</label>
+                        <input type="checkbox" class="custom-control-input" val="100-200" id="price-2">
+                        <label class="custom-control-label" for="price-2">100k - 200k VND</label>
                         <span class="badge border font-weight-normal">295</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-3">
-                        <label class="custom-control-label" for="price-3">$200 - $300</label>
+                        <input type="checkbox" class="custom-control-input" val="200-300" id="price-3">
+                        <label class="custom-control-label" for="price-3">200k - 300k VND</label>
                         <span class="badge border font-weight-normal">246</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-4">
-                        <label class="custom-control-label" for="price-4">$300 - $400</label>
+                        <input type="checkbox" class="custom-control-input" val="300-400" id="price-4">
+                        <label class="custom-control-label" for="price-4">300k - 400k VND</label>
                         <span class="badge border font-weight-normal">145</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                        <input type="checkbox" class="custom-control-input" id="price-5">
-                        <label class="custom-control-label" for="price-5">$400 - $500</label>
+                        <input type="checkbox" class="custom-control-input" val="400-500" id="price-5">
+                        <label class="custom-control-label" for="price-5">400k - 500k VND</label>
                         <span class="badge border font-weight-normal">168</span>
                     </div>
                 </form>
             </div>
             <!-- Price End -->
 
-            <!-- Color Start -->
+            <!-- Category Start -->
             <div class="border-bottom mb-4 pb-4">
                 <h5 class="font-weight-semi-bold mb-4">Lọc theo thể loại</h5>
-                <form>
+                <form id="category-filter-form">
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="color-all">
-                        <label class="custom-control-label" for="price-all">Mọi thể loại</label>
+                        <input type="checkbox" class="custom-control-input" val="all" checked id="all-cat">
+                        <label class="custom-control-label" for="all-cat">Mọi thể loại</label>
                         <span class="badge border font-weight-normal">số sách trong cat</span>
                     </div>
-
+                    @foreach (var cat in Model.categories)
+                    {
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" val="@cat.CategoryId" id="@cat.CategoryId">
+                            <label class="custom-control-label" for="@cat.CategoryId">@cat.CategoryName</label>
+                            <span class="badge border font-weight-normal">145</span>
+                        </div>
+                    }
                 </form>
             </div>
-            <!-- Color End -->
+            <button id="btnFilter" class="fa fa-search">Lọc</button>
+            <!-- Category End -->
         </div>
         <!-- Shop Sidebar End -->
 
 
-        <!-- Shop Product Start -->
+        <!-- Shop Book Start -->
         <div class="col-lg-9 col-md-12">
-            <div class="row pb-3">
+            <div class="row pb-3" id="filtered-books">
                 <div class="col-12 pb-1">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <form asp-action="Search" asp-controller="Books">
@@ -129,14 +137,15 @@
                     <nav aria-label="Page navigation">
                         <ul class="pagination justify-content-center mb-3">
                             <li class="page-item disabled">
-                                <a class="page-link" href="/Books?bookPage=@(Model.pagingInfo.CurrentPage - 1)" aria-label="Previous">
+                                <a class="page-link" href="/Books?bookPage=@(Model.pagingInfo.CurrentPage - 1)"
+                                    aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                     <span class="sr-only">Trang trước</span>
                                 </a>
                             </li>
                             @for (int i = 1; i <= Model.pagingInfo.TotalPages; ++i)
                             {
-                                if(Model.pagingInfo.CurrentPage == i)
+                                if (Model.pagingInfo.CurrentPage == i)
                                 {
                                     <li class="page-item active"><a class="page-link" href="/Books?bookPage=@i">@i</a></li>
                                 }
@@ -146,7 +155,8 @@
                                 }
                             }
                             <li class="page-item">
-                                <a class="page-link" href="/Books?bookPage=@(Model.pagingInfo.CurrentPage + 1)" aria-label="Next">
+                                <a class="page-link" href="/Books?bookPage=@(Model.pagingInfo.CurrentPage + 1)"
+                                    aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                     <span class="sr-only">Trang sau</span>
                                 </a>
@@ -156,7 +166,43 @@
                 </div>
             </div>
         </div>
-        <!-- Shop Product End -->
+        <!-- Shop Book End -->
     </div>
 </div>
 <!-- Shop End -->
+<script>
+    document.getElementById("btnFilter").addEventListener("click", function () {
+        var priceRange = getSelectedCheckboxes("price-filter-form");
+        var cat = getSelectedCheckboxes("category-filter-form")
+        var data ={
+            PriceRange: priceRange,
+            Cat: cat
+        }
+        fetch("./Books/GetFilteredBooks", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }).then(function (response) {
+            if (response.ok) {
+                return response.text();
+            }
+            else {
+                throw new Error("Lỗi không thể truyền dữ liệu")
+            }
+        }).then(function(result){
+            $("#filtered-books").html(result);
+        }).catch(function (error) {
+            console.log("Phát hiện lỗi", error)
+        })
+    })
+    function getSelectedCheckboxes(formId) {
+        var checkboxes = $('#' + formId + ' input[type="checkbox"]:checked');
+        var values = []
+        checkboxes.each(function () {
+            values.push($(this).attr('val'))
+        })
+        return values;
+    }
+</script>

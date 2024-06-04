@@ -153,5 +153,10 @@ namespace OnlineLibrary.Controllers
         {
             return _context.Categories.Any(e => e.CategoryId == id);
         }
+
+        public int CountBooks(int? categoryId)
+        {
+            return _context.Categories.Count(c => c.CategoryId == categoryId);
+        }
     }
 }
