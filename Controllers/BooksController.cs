@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnlineLibrary.Data;
 using OnlineLibrary.Models;
+using OnlineLibrary.Models.ViewModel;
 
 namespace OnlineLibrary.Controllers
 {
@@ -18,23 +19,65 @@ namespace OnlineLibrary.Controllers
         {
             _context = context;
         }
-
+        public int pageSize = 9;
         // GET: Books
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int bookPage = 1)
         {
-            return View(await _context.Books.ToListAsync());
+            return View(
+                new BookListViewModel
+                {
+                    Books = _context.Books.Skip((bookPage - 1) * pageSize).Take(pageSize).ToList(),
+                    pagingInfo = new PagingInfo
+                    {
+                        ItemsPerPage = pageSize,
+                        CurrentPage = bookPage,
+                        TotalItems = _context.Books.Count()
+                    }
+                }
+            );
+        }
+        [HttpPost]
+        public async Task<IActionResult> Search(string keyword, int bookPage = 1)
+        {
+            return View("Index",
+                new BookListViewModel
+                {
+                    Books = _context.Books
+                            .Where(b => b.BookName.Contains(keyword))
+                            .Skip((bookPage - 1) * pageSize)
+                            .Take(pageSize).ToList(),
+                    pagingInfo = new PagingInfo
+                    {
+                        ItemsPerPage = pageSize,
+                        CurrentPage = bookPage,
+                        TotalItems = _context.Books.Count()
+                    }
+                }
+            );
+        }
+        public async Task<IActionResult> BookById(int? categoryId)
+        {
+            if(categoryId != null)
+            {
+                var model = from a in _context.Books join b in _context.BookCategories 
+                            on a.BookId equals b.BookId
+                            where b.CategoryId == categoryId
+                            select a;
+                return View("Index", await model.ToListAsync());
+            }
+            return View("Index", await _context.Books.ToListAsync());
         }
 
         // GET: Books/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? bookId)
         {
-            if (id == null)
+            if (bookId == null)
             {
                 return NotFound();
             }
 
             var book = await _context.Books
-                .FirstOrDefaultAsync(m => m.BookId == id);
+                .FirstOrDefaultAsync(m => m.BookId == bookId);
             if (book == null)
             {
                 return NotFound();

@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineLibrary.Data;
 using OnlineLibrary.Models;
-using OnlineLibrary.ViewModel;
 
 namespace OnlineLibrary.Components
 {

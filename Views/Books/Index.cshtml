@@ -1,103 +1,162 @@
-@model IEnumerable<OnlineLibrary.Models.Book>
+@using OnlineLibrary.Models.ViewModel;
+@model BookListViewModel
 
-@{
-    Layout = null;
-}
+<!-- Shop Start -->
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <!-- Shop Sidebar Start -->
+        <div class="col-lg-3 col-md-12">
+            <!-- Price Start -->
+            <div class="border-bottom mb-4 pb-4">
+                <h5 class="font-weight-semi-bold mb-4">Lọc theo giá</h5>
+                <form>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" checked id="price-all">
+                        <label class="custom-control-label" for="price-all">Mọi giá</label>
+                        <span class="badge border font-weight-normal">1000</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="price-1">
+                        <label class="custom-control-label" for="price-1">$0 - $100</label>
+                        <span class="badge border font-weight-normal">150</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="price-2">
+                        <label class="custom-control-label" for="price-2">$100 - $200</label>
+                        <span class="badge border font-weight-normal">295</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="price-3">
+                        <label class="custom-control-label" for="price-3">$200 - $300</label>
+                        <span class="badge border font-weight-normal">246</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="price-4">
+                        <label class="custom-control-label" for="price-4">$300 - $400</label>
+                        <span class="badge border font-weight-normal">145</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                        <input type="checkbox" class="custom-control-input" id="price-5">
+                        <label class="custom-control-label" for="price-5">$400 - $500</label>
+                        <span class="badge border font-weight-normal">168</span>
+                    </div>
+                </form>
+            </div>
+            <!-- Price End -->
 
-<!DOCTYPE html>
+            <!-- Color Start -->
+            <div class="border-bottom mb-4 pb-4">
+                <h5 class="font-weight-semi-bold mb-4">Lọc theo thể loại</h5>
+                <form>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" checked id="color-all">
+                        <label class="custom-control-label" for="price-all">Mọi thể loại</label>
+                        <span class="badge border font-weight-normal">số sách trong cat</span>
+                    </div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.BookPhoto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookAuthor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookPublicationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookPublisher)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookPages)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookRating)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookLanguage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Featured)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.JustArrived)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookPhoto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookAuthor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookPublicationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookPublisher)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookPages)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookRating)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookLanguage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Featured)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JustArrived)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BookId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-</body>
-</html>
+                </form>
+            </div>
+            <!-- Color End -->
+        </div>
+        <!-- Shop Sidebar End -->
+
+
+        <!-- Shop Product Start -->
+        <div class="col-lg-9 col-md-12">
+            <div class="row pb-3">
+                <div class="col-12 pb-1">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <form asp-action="Search" asp-controller="Books">
+                            <div class="input-group">
+                                <input type="text" name="keyword" class="form-control" placeholder="Tìm theo tên">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-transparent text-primary">
+                                        <button type="submit" class="fa fa-search"></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="dropdown ml-4">
+                            <button class="btn border dropdown-toggle" type="button" id="triggerId"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Tìm theo
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
+                                <a class="dropdown-item" href="#">Mới nhất</a>
+                                <a class="dropdown-item" href="#">Phổ biến</a>
+                                <a class="dropdown-item" href="#">Đánh giá cao</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @foreach (var item in Model.Books)
+                {
+                    <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+                        <div class="card product-item border-0 mb-4">
+                            <div
+                                class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                <img class="img-fluid w-100" src="img/books/@item.BookPhoto" alt="">
+                            </div>
+                            <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                <h6 class="text-truncate mb-3">@item.BookName</h6>
+                                <div class="d-flex justify-content-center">
+                                    @if (@item.IsDiscount == true)
+                                    {
+                                        <h6>Sell:(@item.SellPrice*(1 - @item.DiscountAmount))VND</h6>
+                                        <h6>Rentall:@(item.RentalPrice)VND</h6>
+                                        <h6 class="text-muted ml-2"><del>@item.SellPrice</del>VND</h6>
+                                    }
+                                    else
+                                    {
+                                        <h6>Sell:@(item.SellPrice)VND</h6>
+                                        <h6>Rentall:@(item.RentalPrice)VND</h6>
+                                    }
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between bg-light border">
+                                <a href="/Books/Details/?bookId=@item.BookId" class="btn btn-sm text-dark p-0"><i
+                                        class="fas fa-eye text-primary mr-1"></i>Xem chi tiết</a>
+                                <a href="/Cart/AddToCart/?bookId=@item.BookId" class="btn btn-sm text-dark p-0"><i
+                                        class="fas fa-shopping-cart text-primary mr-1"></i>Thêm vào giỏ hàng</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+                <div class="col-12 pb-1">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center mb-3">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="/Books?bookPage=@(Model.pagingInfo.CurrentPage - 1)" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Trang trước</span>
+                                </a>
+                            </li>
+                            @for (int i = 1; i <= Model.pagingInfo.TotalPages; ++i)
+                            {
+                                if(Model.pagingInfo.CurrentPage == i)
+                                {
+                                    <li class="page-item active"><a class="page-link" href="/Books?bookPage=@i">@i</a></li>
+                                }
+                                else
+                                {
+                                    <li class="page-item"><a class="page-link" href="/Books?bookPage=@i">@i</a></li>
+                                }
+                            }
+                            <li class="page-item">
+                                <a class="page-link" href="/Books?bookPage=@(Model.pagingInfo.CurrentPage + 1)" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Trang sau</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Shop Product End -->
+    </div>
+</div>
+<!-- Shop End -->

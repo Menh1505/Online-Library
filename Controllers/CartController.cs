@@ -14,6 +14,11 @@ namespace MyApp.Namespace
             _context = context;
         }
         public Cart? Cart { get; set; }
+
+        public IActionResult Index()
+        {
+            return View("Cart",  HttpContext.Session.GetJson<Cart>("cart") ?? new Cart());
+        }
         public ActionResult AddToCart(int BookId)
         {
             Book? book = _context.Books.FirstOrDefault(b => b.BookId == BookId);
