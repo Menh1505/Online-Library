@@ -13,14 +13,14 @@
             <div class="d-flex justify-content-center">
                 @if (@Model.IsDiscount == true)
                 {
-                    <h6>Sell:(@Model.SellPrice*(1 - @Model.DiscountAmount))VND</h6>
-                    <h6>Rentall:@(Model.RentalPrice)VND</h6>
+                    <h6>Giá bán:(@Model.SellPrice*(1 - @Model.DiscountAmount))VND</h6>
+                    <h6>Giá thuê:@(Model.RentalPrice)VND</h6>
                     <h6 class="text-muted ml-2"><del>@Model.SellPrice</del>VND</h6>
                 }
                 else
                 {
-                    <h6>Sell:@(Model.SellPrice)VND</h6>
-                    <h6 >Rentall:@(Model.RentalPrice)VND</h6>
+                    <h6>Giá bán:@(Model.SellPrice)VND</h6>
+                    <h6 >Giá thuê:@(Model.RentalPrice)VND</h6>
                 }
             </div>
         </div>
