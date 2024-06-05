@@ -108,17 +108,17 @@
                             </div>
                             <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                                 <h6 class="text-truncate mb-3">@item.BookName</h6>
-                                <div class="d-flex justify-content-center">
+                                <div class=" justify-content-center">
                                     @if (@item.IsDiscount == true)
                                     {
-                                        <h6>Sell:(@item.SellPrice*(1 - @item.DiscountAmount))VND</h6>
-                                        <h6>Rentall:@(item.RentalPrice)VND</h6>
+                                        <h6>Giá bán:(@item.SellPrice*(1 - @item.DiscountAmount))VND</h6>
+                                        <h6>Giá thuê:@(item.RentalPrice)VND</h6>
                                         <h6 class="text-muted ml-2"><del>@item.SellPrice</del>VND</h6>
                                     }
                                     else
                                     {
-                                        <h6>Sell:@(item.SellPrice)VND</h6>
-                                        <h6>Rentall:@(item.RentalPrice)VND</h6>
+                                        <h6>Giá bán:@(item.SellPrice)VND</h6>
+                                        <h6>Giá thuê:@(item.RentalPrice)VND</h6>
                                     }
                                 </div>
                             </div>
