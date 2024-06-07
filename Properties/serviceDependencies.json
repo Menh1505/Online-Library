@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:DefaultConnection\"DefaultConnection\":DataSource=34.124.215.193;InitialCatalog=OnlineLibrary;UserID=sqlserver;Password=laptrinhhuongdoituong;TrustServerCertificate=true"
+    }
+  }
+}
