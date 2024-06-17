@@ -1,4 +1,4 @@
-namespace OnlineLibrary.Models.ViewModel
+namespace OnlineLibrary.Models.ViewModels
 {
     public class PagingInfo
     {

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnlineLibrary.Data;
 using OnlineLibrary.Models;
-using OnlineLibrary.Models.ViewModel;
+using OnlineLibrary.Models.ViewModels;
 
 namespace OnlineLibrary.Controllers
 {
@@ -136,15 +136,15 @@ namespace OnlineLibrary.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookId,BookPhoto,BookName,BookAuthor,BookGenre,BookPublicationDate,BookPublisher,BookDescription,BookPages,BookRating,BookLanguage,Featured,JustArrived")] Book book)
+        public async Task<IActionResult> Create([Bind("BookPhoto,BookName,BookISBN,BookAuthor,BookPublicationDate,BookPublisher,BookDescription,BookPages,BookRating,BookLanguage,Featured,JustArrived")] Book book)
         {
-            if (ModelState.IsValid)
+            if ( ModelState.IsValid )
             {
-                _context.Add(book);
+                _context.Books.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(book);
+            return View("~/Views/Home/Index.cshtml");
         }
 
         // GET: Books/Edit/5
