@@ -6,6 +6,9 @@
     <UserSecretsId>aspnet-OnlineLibrary-70db799b-aae4-4883-b627-663216d854bb</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="Views\_AdminLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
   </ItemGroup>
   <ItemGroup>
@@ -19,5 +22,14 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0-preview.4.24267.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\_AdminLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\_AdminLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\_AdminLayout.cshtml" />
   </ItemGroup>
 </Project>
