@@ -72,6 +72,24 @@ namespace OnlineLibrary.Controllers
                 }
             );
         }
+        public async Task<IActionResult> Admin(int bookPage = 1)
+        {
+            return View(
+                new BookListViewModel
+                {
+                    Books = _context.Books.Skip((bookPage - 1) * pageSize).Take(pageSize).ToList(),
+                    pagingInfo = new PagingInfo
+                    {
+                        ItemsPerPage = pageSize,
+                        CurrentPage = bookPage,
+                        TotalItems = _context.Books.Count()
+                    },
+                    categories = _context.Categories,
+                    bookCategories = _context.BookCategories
+                }
+            );
+        }
+
         [HttpPost]
         public async Task<IActionResult> Search(string keyword, int bookPage = 1)
         {
@@ -93,16 +111,28 @@ namespace OnlineLibrary.Controllers
                 }
             );
         }
-        public async Task<IActionResult> BookById(int? categoryId)
+        public async Task<IActionResult> BookById(int? categoryId, int bookPage = 1)
         {
             if (categoryId != null)
             {
-                var model = from a in _context.Books
+                /* var model = from a in _context.Books
                             join b in _context.BookCategories
                             on a.BookId equals b.BookId
                             where b.CategoryId == categoryId
-                            select a;
-                return View("Index", await model.ToListAsync());
+                            select a; */
+                var model = new BookListViewModel
+                {
+                    Books = _context.Books.Skip((bookPage - 1) * pageSize).Take(pageSize).ToList(),
+                    pagingInfo = new PagingInfo
+                    {
+                        ItemsPerPage = pageSize,
+                        CurrentPage = bookPage,
+                        TotalItems = _context.Books.Count()
+                    },
+                    categories = _context.Categories,
+                    bookCategories = _context.BookCategories.Where(c => c.CategoryId == categoryId).ToList()
+                };
+                return View("Index", model);
             }
             return View("Index", await _context.Books.ToListAsync());
         }
