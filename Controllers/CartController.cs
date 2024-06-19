@@ -59,12 +59,13 @@ namespace MyApp.Namespace
         public async Task<IActionResult> CheckOut()
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            string value = claims.Value.ToString();
+            var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier); 
+            string value = claims.Value.ToString();                             //3 dòng này lấy Id của user hiện tại 
 
             Invoice invoice = new Invoice();
             invoice.Id = value;
             invoice.PaidDate = DateTime.Now;
+            invoice.TotalValues = Cart.ComputeTotalValues();
             string invoiceId = value.Substring(3) + DateTime.Now.ToString("ddMMYYYYHHmmss");
             invoice.InvoiceId = invoiceId;
 

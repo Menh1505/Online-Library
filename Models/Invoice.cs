@@ -12,6 +12,6 @@ namespace OnlineLibrary.Models
         public string Id { get; set;}
         public IdentityUser? identityUser{ get; set; }
         public DateTime PaidDate { get; set;}
-        
+        public decimal TotalValues { get; set; }
     }
 }
