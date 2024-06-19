@@ -12,7 +12,7 @@ using OnlineLibrary.Data;
 namespace OnlineLibrary.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240619100128_invoice")]
+    [Migration("20240619174151_invoice")]
     partial class invoice
     {
         /// <inheritdoc />
@@ -358,11 +358,12 @@ namespace OnlineLibrary.Data.Migrations
 
             modelBuilder.Entity("OnlineLibrary.Models.Invoice", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("InvoiceId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("InvoiceId")
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("PaidDate")
                         .HasColumnType("datetime2");
@@ -370,9 +371,7 @@ namespace OnlineLibrary.Data.Migrations
                     b.Property<string>("identityUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id", "InvoiceId");
-
-                    b.HasIndex("InvoiceId");
+                    b.HasKey("InvoiceId");
 
                     b.HasIndex("identityUserId");
 
@@ -381,21 +380,18 @@ namespace OnlineLibrary.Data.Migrations
 
             modelBuilder.Entity("OnlineLibrary.Models.InvoiceDetail", b =>
                 {
-                    b.Property<int>("InvoiceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("InvoiceId")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceId"));
-
-                    b.Property<int?>("BooksBookId")
+                    b.Property<int>("BookId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("InvoiceId");
+                    b.HasKey("InvoiceId", "BookId");
 
-                    b.HasIndex("BooksBookId");
+                    b.HasIndex("BookId");
 
                     b.ToTable("InvoiceDetails");
                 });
@@ -511,28 +507,30 @@ namespace OnlineLibrary.Data.Migrations
 
             modelBuilder.Entity("OnlineLibrary.Models.Invoice", b =>
                 {
-                    b.HasOne("OnlineLibrary.Models.InvoiceDetail", "invoiceDetail")
-                        .WithMany()
-                        .HasForeignKey("InvoiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "identityUser")
                         .WithMany()
                         .HasForeignKey("identityUserId");
 
                     b.Navigation("identityUser");
-
-                    b.Navigation("invoiceDetail");
                 });
 
             modelBuilder.Entity("OnlineLibrary.Models.InvoiceDetail", b =>
                 {
                     b.HasOne("OnlineLibrary.Models.Book", "Books")
                         .WithMany()
-                        .HasForeignKey("BooksBookId");
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OnlineLibrary.Models.Invoice", "invoices")
+                        .WithMany()
+                        .HasForeignKey("InvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Books");
+
+                    b.Navigation("invoices");
                 });
 #pragma warning restore 612, 618
         }

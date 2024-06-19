@@ -4,12 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OnlineLibrary.Models
 {
-    [PrimaryKey("Id", "InvoiceId")]
+    [PrimaryKey("InvoiceId")]
     public class Invoice 
     {
-        [ForeignKey("InvoiceDetail")]
-        public int InvoiceId { get; set;}
-        public InvoiceDetail? invoiceDetail { get; set;}
+        public string InvoiceId { get; set;}
         [ForeignKey("Users")]
         public string Id { get; set;}
         public IdentityUser? identityUser{ get; set; }
