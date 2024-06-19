@@ -8,6 +8,5 @@ namespace OnlineLibrary.Models
         public int InvoiceId { get; set;}
         public Book? Books{ get; set; }
         public int Quantity {get; set;}
-        public DateTime PaidDate { get; set;}
     }
 }

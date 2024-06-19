@@ -13,6 +13,7 @@ namespace OnlineLibrary.Models
         [ForeignKey("Users")]
         public string Id { get; set;}
         public IdentityUser? identityUser{ get; set; }
+        public DateTime PaidDate { get; set;}
         
     }
 }
