@@ -52,5 +52,11 @@ namespace MyApp.Namespace
             }
             return View("Cart", Cart);
         }
+
+        /* public IActionResult CheckOut()
+        {
+
+            return View();
+        } */
     }
 }
