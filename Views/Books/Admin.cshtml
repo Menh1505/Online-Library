@@ -49,9 +49,15 @@
                         <td class="text-center">@item.SellPrice</td>
                         <td class="text-center">@item.RentalPrice</td>
                         <td class="text-center">
-                            @foreach(var cat in Model.bookCategories.Where(c=> c.BookId == item.BookId).ToList())
+                            @foreach (var cat in Model.bookCategories.Where(c => c.BookId == item.BookId).ToList())
                             {
-
+                                foreach (var c in Model.categories)
+                                {
+                                    if (cat.CategoryId == c.CategoryId)
+                                    {
+                                        <div>@c.CategoryName</div>
+                                    }
+                                }
                             }
                         </td>
                         <td class="text-center">@item.BookISBN</td>
