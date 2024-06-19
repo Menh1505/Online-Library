@@ -9,7 +9,7 @@
             <table class="table table-bordered text-center mb-0">
                 <thead class="bg-secondary text-dark">
                     <tr>
-                        <th>Sách</th>
+                        <th>Tên sách</th>
                         <th>Giá bán</th>
                         <th>Giá thuê</th>
                         <th>Số lượng</th>
@@ -63,19 +63,19 @@
         <div class="col-lg-4">
             <form class="mb-5" action="">
                 <div class="input-group">
-                    <input type="text" class="form-control p-4" placeholder="Coupon Code">
+                    <input type="text" class="form-control p-4" placeholder="Mã giảm giá">
                     <div class="input-group-append">
-                        <button class="btn btn-primary">Mã giá</button>
+                        <button class="btn btn-primary">Xác nhận</button>
                     </div>
                 </div>
             </form>
             <div class="card border-secondary mb-5">
                 <div class="card-header bg-secondary border-0">
-                    <h4 class="font-weight-semi-bold m-0">Tổng hàng</h4>
+                    <h4 class="font-weight-semi-bold m-0">Đơn hàng</h4>
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between mb-3 pt-1">
-                        <h6 class="font-weight-medium">Tổng tiền</h6>
+                        <h6 class="font-weight-medium">Tổng số tiền</h6>
                         <h6 class="font-weight-medium">@Model?.ComputeTotalValues() VND</h6>
                     </div>
                     <div class="d-flex justify-content-between">
