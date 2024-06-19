@@ -58,6 +58,8 @@ namespace MyApp.Namespace
         [Authorize]
         public async Task<IActionResult> CheckOut()
         {
+            Cart = HttpContext.Session.GetJson<Cart>("cart"); //lấy dự liệu từ session
+
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier); 
             string value = claims.Value.ToString();                             //3 dòng này lấy Id của user hiện tại 
@@ -71,7 +73,6 @@ namespace MyApp.Namespace
 
             _context.Invoices.Add(invoice);
 
-            Cart = HttpContext.Session.GetJson<Cart>("cart");
             foreach(var cart in Cart.Lines)
             {
                 _context.InvoiceDetails.Add(new InvoiceDetail{

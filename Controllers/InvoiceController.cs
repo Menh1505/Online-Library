@@ -23,5 +23,9 @@ namespace OnlineLibrary.Controllers
                 IdentityUsers = (IEnumerable<IdentityUser>)_context.Users.ToList()
             });
         }
+        public IActionResult Detail(string id)
+        {
+            return View();
+        }
     }
 }
