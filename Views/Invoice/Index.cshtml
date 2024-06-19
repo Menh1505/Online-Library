@@ -1,3 +1,4 @@
+@using Microsoft.AspNetCore.Identity
 @model OnlineLibrary.Models.ViewModels.InvoiceViewModel
 @{
     Layout = "~/Views/_AdminLayout.cshtml";
@@ -10,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>Quản lí hóa đơn</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="">
@@ -39,11 +40,12 @@
                         if(item.Id == user.Id)
                         {
                             <td class="text-center">@user.UserName</td>
+                            break;
                         }
                     }
                     <td class="text-center">@item.TotalValues</td>
                     <td class="text-center">@item.PaidDate</td>
-                    <td class="text-center"><a href="">Chi tiết</a></td>
+                    <td class="text-center"><a href="~/Invoice/Detail?invoiceId=@item.InvoiceId&Id=@item.Id">Chi tiết</a></td>
                 </tr>
             }
         </tbody>

@@ -17,15 +17,27 @@ namespace OnlineLibrary.Controllers
         }
         public IActionResult Index()
         {
-            return View(new InvoiceViewModel{
+            return View(new InvoiceViewModel
+            {
                 Invoices = (IEnumerable<Invoice>)_context.Invoices.ToList(),
                 InvoicesDetails = (IEnumerable<InvoiceDetail>)_context.InvoiceDetails.ToList(),
                 IdentityUsers = (IEnumerable<IdentityUser>)_context.Users.ToList()
             });
         }
-        public IActionResult Detail(string id)
+        public IActionResult Detail(string invoiceId, string id)
         {
-            return View();
+            var InvoicesDetails = _context.InvoiceDetails.Where(ivd => ivd.InvoiceId == invoiceId).ToList();
+            foreach (var ivd in InvoicesDetails)
+            {
+                ivd.Books = _context.Books.FirstOrDefault(b => b.BookId == ivd.BookId);
+            }
+
+            return View(new InvoiceDetailViewModel
+            {
+                Invoice = _context.Invoices.FirstOrDefault(i => i.InvoiceId == invoiceId),
+                InvoicesDetails = InvoicesDetails,
+                IdentityUsers = _context.Users.FirstOrDefault(u => u.Id == id)
+            });
         }
     }
 }
