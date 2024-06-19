@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineLibrary.Data;
 using OnlineLibrary.Data.Migrations;
@@ -16,11 +17,10 @@ namespace OnlineLibrary.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Invoice> invoices = (IEnumerable<Invoice>)_context.Invoices.ToList();
-            IEnumerable<InvoiceDetail> invoiceDetails = (IEnumerable<InvoiceDetail>)_context.InvoiceDetails.ToList();
             return View(new InvoiceViewModel{
-                Invoices = invoices,
-                InvoicesDetails = invoiceDetails
+                Invoices = (IEnumerable<Invoice>)_context.Invoices.ToList(),
+                InvoicesDetails = (IEnumerable<InvoiceDetail>)_context.InvoiceDetails.ToList(),
+                IdentityUsers = (IEnumerable<IdentityUser>)_context.Users.ToList()
             });
         }
     }
