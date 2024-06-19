@@ -1,7 +1,7 @@
 ﻿@model OnlineLibrary.Models.Book
 
 @{
-    
+    Layout = "~/Views/_AdminLayout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -101,7 +101,7 @@
         </div>
     </div>
 <div style="text-align: center">
-    <a asp-action="Index" asp-controller="Books">Quay về</a>
+    <a asp-action="Admin" asp-controller="Books">Quay về</a>
 </div>
 
 </body>
