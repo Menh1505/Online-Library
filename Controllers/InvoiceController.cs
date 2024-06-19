@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineLibrary.Data;
+using OnlineLibrary.Data.Migrations;
+using OnlineLibrary.Models;
+using OnlineLibrary.Models.ViewModels;
 
-namespace MyApp.Namespace
+namespace OnlineLibrary.Controllers
 {
     public class InvoiceController : Controller
     {
@@ -11,10 +14,14 @@ namespace MyApp.Namespace
         {
             _context = context;
         }
-        public ActionResult Index()
+        public IActionResult Index()
         {
-            return View();
+            IEnumerable<Invoice> invoices = (IEnumerable<Invoice>)_context.Invoices.ToList();
+            IEnumerable<InvoiceDetail> invoiceDetails = (IEnumerable<InvoiceDetail>)_context.InvoiceDetails.ToList();
+            return View(new InvoiceViewModel{
+                Invoices = invoices,
+                InvoicesDetails = invoiceDetails
+            });
         }
-
     }
 }
