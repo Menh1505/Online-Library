@@ -16,7 +16,7 @@
 
 <h4 style="text-align: center; font-weight: bold;">Thêm sách vào thư viện</h4>
 <hr />
-    <div class="container" >    
+    <div class="container">    
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
@@ -31,6 +31,11 @@
                         <label asp-for="BookName" class="control-label" style="max-height: 500px; max-width: 400px"></label>
                         <input asp-for="BookName" class="form-control" placeholder="Tên sách" />
                         <span asp-validation-for="BookName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BookISBN" class="control-label"></label>
+                        <input asp-for="BookISBN" class="form-control" placeholder="ISNB" />
+                        <span asp-validation-for="BookISBN" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="BookAuthor" class="control-label"></label>
@@ -67,6 +72,11 @@
                         <input asp-for="BookLanguage" class="form-control" placeholder="Ngôn ngữ" />
                         <span asp-validation-for="BookLanguage" class="text-danger"></span>
                     </div>
+                    @* <div class="form-group">
+                        <label asp-for="bookCategory.CategoryId" class="control-label"></label>
+                        <input asp-for="bookCategory.CategoryId" class="form-control" placeholder="Thể loại" />
+                        <span asp-validation-for="bookCategory.CategoryId" class="text-danger"></span>
+                    </div> *@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group form-check">
@@ -84,7 +94,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-primary w-100" />
+                        <input type="submit" value="Tạo" class="btn btn-primary w-100" />
                     </div>
                 </form>
             </div>

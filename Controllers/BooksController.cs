@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnlineLibrary.Data;
 using OnlineLibrary.Models;
-using OnlineLibrary.Models.ViewModel;
+using OnlineLibrary.Models.ViewModels;
 
 namespace OnlineLibrary.Controllers
 {
@@ -72,6 +72,24 @@ namespace OnlineLibrary.Controllers
                 }
             );
         }
+        public async Task<IActionResult> Admin(int bookPage = 1)
+        {
+            return View(
+                new BookListViewModel
+                {
+                    Books = _context.Books.Skip((bookPage - 1) * pageSize).Take(pageSize).ToList(),
+                    pagingInfo = new PagingInfo
+                    {
+                        ItemsPerPage = pageSize,
+                        CurrentPage = bookPage,
+                        TotalItems = _context.Books.Count()
+                    },
+                    categories = _context.Categories,
+                    bookCategories = _context.BookCategories
+                }
+            );
+        }
+
         [HttpPost]
         public async Task<IActionResult> Search(string keyword, int bookPage = 1)
         {
@@ -93,16 +111,28 @@ namespace OnlineLibrary.Controllers
                 }
             );
         }
-        public async Task<IActionResult> BookById(int? categoryId)
+        public async Task<IActionResult> BookById(int? categoryId, int bookPage = 1)
         {
             if (categoryId != null)
             {
-                var model = from a in _context.Books
+                /* var model = from a in _context.Books
                             join b in _context.BookCategories
                             on a.BookId equals b.BookId
                             where b.CategoryId == categoryId
-                            select a;
-                return View("Index", await model.ToListAsync());
+                            select a; */
+                var model = new BookListViewModel
+                {
+                    Books = _context.Books.Skip((bookPage - 1) * pageSize).Take(pageSize).ToList(),
+                    pagingInfo = new PagingInfo
+                    {
+                        ItemsPerPage = pageSize,
+                        CurrentPage = bookPage,
+                        TotalItems = _context.Books.Count()
+                    },
+                    categories = _context.Categories,
+                    bookCategories = _context.BookCategories.Where(c => c.CategoryId == categoryId).ToList()
+                };
+                return View("Index", model);
             }
             return View("Index", await _context.Books.ToListAsync());
         }
@@ -136,15 +166,15 @@ namespace OnlineLibrary.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookId,BookPhoto,BookName,BookAuthor,BookGenre,BookPublicationDate,BookPublisher,BookDescription,BookPages,BookRating,BookLanguage,Featured,JustArrived")] Book book)
+        public async Task<IActionResult> Create([Bind("BookPhoto,BookName,BookISBN,BookAuthor,BookPublicationDate,BookPublisher,BookDescription,BookPages,BookRating,BookLanguage,Featured,JustArrived")] Book book)
         {
-            if (ModelState.IsValid)
+            if ( ModelState.IsValid )
             {
-                _context.Add(book);
+                _context.Books.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(book);
+            return View("~/Views/Home/Index.cshtml");
         }
 
         // GET: Books/Edit/5

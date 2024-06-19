@@ -1,6 +1,6 @@
 using OnlineLibrary.Data;
 
-namespace OnlineLibrary.Models.ViewModel
+namespace OnlineLibrary.Models.ViewModels
 {
     public class BookListViewModel
     {

@@ -1,15 +1,44 @@
 @inject SignInManager<IdentityUser> SignInManager
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@inject UserManager<IdentityUser> userManager
+@inject ApplicationDbContext _context
+@using OnlineLibrary.Data
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+    var claimsIdentity = (ClaimsIdentity)User.Identity;
+    var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+    string value = claims.Value.ToString();
+    var role = _context.UserRoles;
+    bool isAdmin = false;
+    foreach(var r in role)
+    {
+        if(r.UserId == value && r.RoleId == "1")
+        {
+            isAdmin = true;
+        }
+    }
 }
 <ul class="nav nav-pills flex-column">
-    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile"
+            asp-page="./Index">Thông tin</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email"
+            asp-page="./Email">Email</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password"
+            asp-page="./ChangePassword">Mật khẩu</a></li>
     @if (hasExternalLogins)
     {
-        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
+        <li id="external-logins" class="nav-item"><a id="external-login"
+                class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">Đăng nhập
+                tài khoản ngoài</a></li>
     }
-    <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)"
+            id="two-factor" asp-page="./TwoFactorAuthentication">Xác thực hai lớp</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data"
+            asp-page="./PersonalData">Dữ liệu cá nhân</a></li>
+    @if(isAdmin)
+    {
+        <li class="nav-item"><a href="~/Books/Admin" class="nav-link" id="personal-data">Trang quản lý của Admin</a></li>
+    }
 </ul>
+
