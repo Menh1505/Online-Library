@@ -6,6 +6,18 @@
     <UserSecretsId>aspnet-OnlineLibrary-70db799b-aae4-4883-b627-663216d854bb</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Views\NewFolder\**" />
+    <Content Remove="Views\NewFolder\**" />
+    <EmbeddedResource Remove="Views\NewFolder\**" />
+    <None Remove="Views\NewFolder\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Views\Contact\contact.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Contact\contact.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
   </ItemGroup>
   <ItemGroup>

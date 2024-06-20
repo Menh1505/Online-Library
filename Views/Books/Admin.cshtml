@@ -50,6 +50,10 @@
                         <td class="text-center">
                             @foreach (var cat in Model.bookCategories.Where(c => c.BookId == item.BookId).ToList())
                             {
+                                foreach(var c in Model.categories)
+                                {
+                                    if(cat.CategoryId == c.CategoryId)
+
                                 foreach (var c in Model.categories)
                                 {
                                     if (cat.CategoryId == c.CategoryId)
@@ -60,7 +64,7 @@
                             }
                         </td>
                         <td class="text-center">@item.BookISBN</td>
-                        <td class="text-center">@item.BookDescription</td>
+                        <td class="text-center" style="display: flex; justify-content: center; align-items: center">@item.BookDescription</td>
                         <td class="text-center"><a href="~/Books/Edit?id=@item.BookId">Sửa</a></td>
                         <td class="text-center"><a href="~/Books/Delete?id=@item.BookId">Xóa</a></td>
                     </tr>
