@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineLibrary.Data;
 using OnlineLibrary.Infrastructure;
@@ -17,7 +19,7 @@ namespace MyApp.Namespace
 
         public IActionResult Index()
         {
-            return View("Cart",  HttpContext.Session.GetJson<Cart>("cart") ?? new Cart());
+            return View("Cart", HttpContext.Session.GetJson<Cart>("cart") ?? new Cart());
         }
         public ActionResult AddToCart(int BookId)
         {
@@ -51,6 +53,37 @@ namespace MyApp.Namespace
                 HttpContext.Session.SetJson("cart", Cart);
             }
             return View("Cart", Cart);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> CheckOut()
+        {
+            Cart = HttpContext.Session.GetJson<Cart>("cart"); //lấy dự liệu từ session
+
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier); 
+            string value = claims.Value.ToString();                             //3 dòng này lấy Id của user hiện tại 
+
+            Invoice invoice = new Invoice();
+            invoice.Id = value;
+            invoice.PaidDate = DateTime.Now;
+            invoice.TotalValues = Cart.ComputeTotalValues();
+            string invoiceId = value.Substring(3) + DateTime.Now.ToString("ddMMYYYYHHmmss");
+            invoice.InvoiceId = invoiceId;
+
+            _context.Invoices.Add(invoice);
+
+            foreach(var cart in Cart.Lines)
+            {
+                _context.InvoiceDetails.Add(new InvoiceDetail{
+                    InvoiceId = invoiceId,
+                    BookId = cart.Book.BookId,
+                    Quantity = cart.Quantity
+                });
+            }
+            Cart.Clear();
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Books", 1);
         }
     }
 }

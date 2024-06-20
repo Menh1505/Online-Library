@@ -37,22 +37,24 @@
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
-                                        <a href="/Cart/RemoveFromCart/?bookId=@line.Book.BookId" class="btn btn-sm btn-primary btn-minus">
+                                        <a href="/Cart/RemoveFromCart/?bookId=@line.Book.BookId"
+                                            class="btn btn-sm btn-primary btn-minus">
                                             <i class="fa fa-minus"></i>
-                                        </a >
+                                        </a>
                                     </div>
                                     <input type="text" class="form-control form-control-sm bg-secondary text-center"
                                         value="@line.Quantity">
                                     <div class="input-group-btn">
-                                        <a href="/Cart/AddToCart/?bookId=@line.Book.BookId" class="btn btn-sm btn-primary btn-plus">
+                                        <a href="/Cart/AddToCart/?bookId=@line.Book.BookId"
+                                            class="btn btn-sm btn-primary btn-plus">
                                             <i class="fa fa-plus"></i>
-                                        </a >
+                                        </a>
                                     </div>
                                 </div>
                             </td>
                             <td class="align-middle">@(line.Book.SellPrice * line.Quantity)</td>
-                            <td class="align-middle"><a href="/Cart/DeleteCart/?BookId=@line.Book.BookId" class="btn btn-sm btn-primary"><i
-                                        class="fa fa-times"></i></a></td>
+                            <td class="align-middle"><a href="/Cart/DeleteCart/?BookId=@line.Book.BookId"
+                                    class="btn btn-sm btn-primary"><i class="fa fa-times"></i></a></td>
                         </tr>
                     }
                 </tbody>
@@ -61,14 +63,12 @@
 
 
         <div class="col-lg-4">
-            <form class="mb-5" action="">
-                <div class="input-group">
-                    <input type="text" class="form-control p-4" placeholder="Mã giảm giá">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary">Xác nhận</button>
-                    </div>
+            <div class="input-group">
+                <input type="text" class="form-control p-4" placeholder="Mã giảm giá">
+                <div class="input-group-append">
+                    <button class="btn btn-primary">Xác nhận</button>
                 </div>
-            </form>
+            </div>
             <div class="card border-secondary mb-5">
                 <div class="card-header bg-secondary border-0">
                     <h4 class="font-weight-semi-bold m-0">Đơn hàng</h4>
@@ -88,7 +88,7 @@
                         <h5 class="font-weight-bold">Tổng thanh toán</h5>
                         <h5 class="font-weight-bold">@(Model?.ComputeTotalValues() + 100000) VND</h5>
                     </div>
-                    <button class="btn btn-block btn-primary my-3 py-3">Xác nhận thanh toán</button>
+                    <button class="btn btn-block btn-primary my-3 py-3"><a href="/Cart/CheckOut">Xác nhận thanh toán</a></button>
                 </div>
             </div>
         </div>

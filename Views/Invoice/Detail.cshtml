@@ -1,0 +1,45 @@
+@model OnlineLibrary.Models.ViewModels.InvoiceDetailViewModel
+@{
+    Layout = "~/Views/_AdminLayout.cshtml";
+    int bookCount = 1;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết hóa đơn</title>
+</head>
+
+<body>
+    <div>Mã hóa đơn: @Model.Invoice.InvoiceId</div>
+    <div>Tên khách hàng: @Model.IdentityUsers.UserName</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">STT</th>
+                <th scope="col" class="text-center">Tên sản phầm</th>
+                <th scope="col" class="text-center">Hình ảnh</th>
+                <th scope="col" class="text-center">Giá bán</th>
+                <th scope="col" class="text-center">Mã ISBN</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.InvoicesDetails)
+            {
+                <tr>
+                    <th scope="row" class="text-center">@(bookCount++)</th>
+                    <td class="text-center">@item.Books.BookName</td>
+                    <td class="text-center"><img class="img-fluid w-100" src="/img/books/@item.Books.BookPhoto" alt=""></td>
+                    <td class="text-center">@item.Books.SellPrice</td>
+                    <td class="text-center">@item.Books.BookISBN</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</body>
+
+</html>
