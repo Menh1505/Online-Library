@@ -14,8 +14,9 @@
 </head>
 
 <body>
-    <div>Mã hóa đơn: @Model.Invoice.InvoiceId</div>
-    <div>Tên khách hàng: @Model.IdentityUsers.UserName</div>
+    <h2 style="display: flex; justify-content: center; margin-top: 10px">Chi tiết hóa đơn</h2>
+	<div><b>Mã hóa đơn:</b> @Model.Invoice.InvoiceId</div>
+	<div><b>Tên khách hàng:</b> @Model.IdentityUsers.UserName</div>
     <table class="table">
         <thead>
             <tr>
@@ -32,7 +33,7 @@
                 <tr>
                     <th scope="row" class="text-center">@(bookCount++)</th>
                     <td class="text-center">@item.Books.BookName</td>
-                    <td class="text-center"><img class="img-fluid w-100" src="/img/books/@item.Books.BookPhoto" alt=""></td>
+                    <td class="text-center"><img class="img-fluid" width="100px" height="100px" src="/img/books/@item.Books.BookPhoto" alt=""></td>
                     <td class="text-center">@item.Books.SellPrice</td>
                     <td class="text-center">@item.Books.BookISBN</td>
                 </tr>
