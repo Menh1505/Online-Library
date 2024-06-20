@@ -28,4 +28,6 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Category> Categories { get; set;}
     public DbSet<Inventory> Inventories { get; set;}
     public DbSet<Warehouse> Warehouses { get; set;}
+    public DbSet<Invoice> Invoices { get; set;}
+    public DbSet<InvoiceDetail> InvoiceDetails {get; set;}  
 }
