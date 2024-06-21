@@ -32,11 +32,13 @@
                 @Html.DisplayFor(model => model.CategoryName)
 
             </dl>
+            <div style="display: flex; justify-content: center;">                
+                <img class="img-fluid" width="300" height="300" href="img/cat/@Model.CategoryPhoto" />
+            </div>
         </div>
     </div>
-
 <div>
-        <a asp-action="Edit" asp-route-id="@Model?.CategoryId" style="display: flex;justify-content: center;">Chỉnh sửa</a>
+        <a asp-action="Edit" asp-route-id="@Model?.CategoryId" style="display: flex;justify-content: center; margin-top: 10px">Chỉnh sửa</a>
     <a asp-action="Index" style="display: flex;justify-content: center;">Quay lại</a>
 </div>
 </body>

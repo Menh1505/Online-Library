@@ -1,6 +1,7 @@
 @model Cart?
 
 <!-- Cart Start -->
+<h2 style="display: flex; justify-content: center">Giỏ hàng của bạn</h2>
 <div class="container-fluid pt-5">
     <div class="row px-xl-5">
         <div class="col-lg-8 table-responsive mb-5">
@@ -20,7 +21,7 @@
                     @foreach (var line in Model?.Lines)
                     {
                         <tr>
-                            <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;">
+                            <td class="align-middle"><img src="img/books/@line.Book.BookPhoto" alt="" style="width: 50px;">
                                 @line.Book.BookName</td>
                             @if (line.Book.IsDiscount == true)
                             {
@@ -86,7 +87,7 @@
                         <h5 class="font-weight-bold">Tổng thanh toán</h5>
                         <h5 class="font-weight-bold">@(Model?.ComputeTotalValues() + 100000) VND</h5>
                     </div>
-                    <button class="btn btn-block btn-primary my-3 py-3"><a href="/Cart/CheckOut">Xác nhận thanh toán</a></button>
+                    <button class="btn btn-block btn-secondary my-3 py-3"><a href="/Cart/CheckOut">Xác nhận thanh toán</a></button>
                 </div>
             </div>
         </div>
