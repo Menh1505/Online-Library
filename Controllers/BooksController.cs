@@ -158,6 +158,7 @@ namespace OnlineLibrary.Controllers
         // GET: Books/Create
         public IActionResult Create()
         {
+
             return View();
         }
 
@@ -174,7 +175,7 @@ namespace OnlineLibrary.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View("~/Views/Home/Index.cshtml");
+            return View("~/Views/Books/Admin.cshtml");
         }
 
         // GET: Books/Edit/5

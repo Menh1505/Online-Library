@@ -50,7 +50,8 @@
                         <td class="text-center">
                             @foreach (var cat in Model.bookCategories.Where(c => c.BookId == item.BookId).ToList())
                             {
-                                foreach (var c in Model.categories)
+
+                                foreach(var c in Model.categories)
                                 {
                                     if (cat.CategoryId == c.CategoryId)
                                     {
